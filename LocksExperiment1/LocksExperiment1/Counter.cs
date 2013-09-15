@@ -16,7 +16,10 @@ namespace LocksExperiment1
 
         internal int MoveNext()
         {
-            return CurrentValue++;
+            using (this.@lock.Acquire())
+            {
+                return CurrentValue++;
+            }
         }
 
         public int CurrentValue { get; private set; }

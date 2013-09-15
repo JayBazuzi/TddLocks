@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LocksExperiment1
 {
-    class MyLock
+    class Lock
     {
         public void Acquire()
         {

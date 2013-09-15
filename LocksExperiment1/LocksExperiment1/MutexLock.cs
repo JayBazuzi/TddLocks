@@ -18,7 +18,6 @@ namespace LocksExperiment1
             return this;
         }
 
-        bool _isLocked;
         bool ILock.IsLocked { get { return this.isLocked; } }
 
         void IDisposable.Dispose()

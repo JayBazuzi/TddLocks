@@ -12,7 +12,7 @@ namespace LocksExperiment1
             this.IsLocked = true;
         }
 
-        public bool IsLocked;
+        public bool IsLocked { get; private set; }
 
         internal void Release()
         {

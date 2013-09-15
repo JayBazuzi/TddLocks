@@ -34,7 +34,6 @@ namespace LocksExperiment1
             @lock.Release();
 
             Assert.False(@lock.IsLocked);
-
         }
     }
 }

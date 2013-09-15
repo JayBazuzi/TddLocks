@@ -1,7 +1,7 @@
 ﻿using System;
 namespace LocksExperiment1
 {
-    interface ILock : IDisposable
+    public interface ILock : IDisposable
     {
         IDisposable Acquire();
 

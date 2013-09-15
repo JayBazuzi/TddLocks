@@ -7,18 +7,20 @@ using Xunit;
 
 namespace LocksExperiment1
 {
-    public class LockTests
+    public abstract class LockTests
     {
+        protected abstract ILock Create();
+
         [Fact]
-        void CanCreateLock()
+        public void CanCreateLock()
         {
-            new SingleThreadedLock();
+            Create();
         }
 
         [Fact]
-        void LockedLockShouldBeLocked()
+        public void LockedLockShouldBeLocked()
         {
-            var @lock = new SingleThreadedLock();
+            var @lock = Create();
 
             Assert.False(@lock.IsLocked);
             @lock.Acquire();
@@ -26,9 +28,9 @@ namespace LocksExperiment1
         }
 
         [Fact]
-        void CanReleaseLock()
+        public void CanReleaseLock()
         {
-            var @lock = new SingleThreadedLock();
+            var @lock = Create();
 
             @lock.Acquire();
             @lock.Dispose();
@@ -50,9 +52,9 @@ namespace LocksExperiment1
         //          // ...
         //      }
         [Fact]
-        void DisposableLock()
+        public void DisposableLock()
         {
-            var @lock = new SingleThreadedLock();
+            var @lock = Create();
 
             using (@lock.Acquire())
             {

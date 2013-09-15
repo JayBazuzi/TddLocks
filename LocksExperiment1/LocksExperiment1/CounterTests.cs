@@ -43,8 +43,10 @@ namespace LocksExperiment1
 
         Counter Create()
         {
-            return new Counter(new MockLock());
+            return new Counter(this.mockLock);
         }
+
+        MockLock mockLock = new MockLock();
 
         [Fact]
         public void CanCreateCounter()

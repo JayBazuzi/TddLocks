@@ -14,11 +14,11 @@ namespace LocksExperiment1
             this.@lock = @lock;
         }
 
-        int i = 0;
-
         internal int GetValue()
         {
-            return i++;
+            return CurrentValue++;
         }
+
+        public int CurrentValue { get; private set; }
     }
 }

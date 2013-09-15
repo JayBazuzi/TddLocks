@@ -14,6 +14,7 @@ namespace LocksExperiment1
             bool acquired = false;
             IDisposable ILock.Acquire()
             {
+                Assert.Equal(this.originalValue, counter.CurrentValue);
                 this.acquired = true;
                 return this;
             }
@@ -29,21 +30,24 @@ namespace LocksExperiment1
             bool disposed = false;
             void IDisposable.Dispose()
             {
+                Assert.NotEqual(this.originalValue, counter.CurrentValue);
                 this.disposed = true;
             }
-        }
 
-        public class MockLockTests : LockTests
-        {
-            protected override ILock Create()
+            Counter counter;
+            int originalValue;
+            internal void SetCounter(Counter counter)
             {
-                return new MockLock();
+                this.counter = counter;
+                this.originalValue = counter.CurrentValue;
             }
         }
 
         Counter Create()
         {
-            return new Counter(this.mockLock);
+            var counter = new Counter(this.mockLock);
+            this.mockLock.SetCounter(counter);
+            return counter;
         }
 
         MockLock mockLock = new MockLock();
@@ -69,6 +73,13 @@ namespace LocksExperiment1
             counter.GetValue();
             var result = counter.GetValue();
             Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void CounterShouldLockAroundChange()
+        {
+            var counter = Create();
+            counter.GetValue();
         }
     }
 }

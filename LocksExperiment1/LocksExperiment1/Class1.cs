@@ -14,9 +14,9 @@ namespace LocksExperiment1
     public class Tests
     {
         [Fact]
-        public void Fail()
+        public void Pass()
         {
-            Assert.True(false);
+            Assert.True(true);
         }
     }
 }

@@ -37,11 +37,9 @@ namespace LocksExperiment1
             }
 
             Counter counter;
-            int originalValue;
             internal void SetCounter(Counter counter)
             {
                 this.counter = counter;
-                this.originalValue = counter.CurrentValue;
             }
         }
 

@@ -46,6 +46,7 @@
     <Compile Include="Counter.cs" />
     <Compile Include="ILock.cs" />
     <Compile Include="MockLock.cs" />
+    <Compile Include="MockLockTests.cs" />
     <Compile Include="MonitorLock.cs" />
     <Compile Include="MonitorLockTests.cs" />
     <Compile Include="SingleThreadedLock.cs" />

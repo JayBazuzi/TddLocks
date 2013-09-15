@@ -9,14 +9,6 @@ namespace LocksExperiment1
 {
     public class CounterTests
     {
-        public class MockLockTests : LockTests
-        {
-            protected override ILock Create()
-            {
-                return new MockLock<Counter>();
-            }
-        }
-
         Counter Create()
         {
             var counter = new Counter(this.mockLock);

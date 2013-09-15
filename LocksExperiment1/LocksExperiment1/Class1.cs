@@ -12,7 +12,24 @@ namespace LocksExperiment1
         [Fact]
         public void CanCreateCounter()
         {
-            new Counter();
+            var counter = new Counter();
+        }
+
+        [Fact]
+        public void CounterShouldStartAtZeor()
+        {
+            var counter = new Counter();
+            var result = counter.GetValue();
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public void CountShouldCount()
+        {
+            var counter = new Counter();
+            counter.GetValue();
+            var result = counter.GetValue();
+            Assert.Equal(1, result);
         }
     }
 }

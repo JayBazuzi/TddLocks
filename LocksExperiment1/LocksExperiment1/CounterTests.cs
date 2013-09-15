@@ -11,7 +11,7 @@ namespace LocksExperiment1
     {
         Counter Create()
         {
-            return new Counter() ;
+            return new Counter(new SingleThreadedLock());
         }
 
         [Fact]

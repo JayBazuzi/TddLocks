@@ -11,7 +11,7 @@ namespace LocksExperiment1
     {
         protected override ILock Create()
         {
-            throw new NotImplementedException();
+            return new MutexLock();
         }
     }
 }

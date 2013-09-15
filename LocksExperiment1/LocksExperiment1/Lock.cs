@@ -7,9 +7,10 @@ namespace LocksExperiment1
 {
     class Lock
     {
-        public void Acquire()
+        public IDisposable Acquire()
         {
             this.IsLocked = true;
+            return null;
         }
 
         public bool IsLocked { get; private set; }

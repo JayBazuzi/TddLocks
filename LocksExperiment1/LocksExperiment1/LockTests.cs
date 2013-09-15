@@ -14,5 +14,16 @@ namespace LocksExperiment1
         {
             new Lock();
         }
+
+        [Fact]
+        void LockedLockShouldBeLocked()
+        {
+            var @lock = new Lock();
+            @lock.Lock();
+
+            var result = @lock.IsLocked;
+
+            Assert.True(result.IsLocked);
+        }
     }
 }

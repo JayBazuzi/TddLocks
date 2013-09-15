@@ -7,16 +7,12 @@ using Xunit;
 
 namespace LocksExperiment1
 {
-    public class Class1
-    {
-    }
-
-    public class Tests
+    public class CounterTests
     {
         [Fact]
-        public void Pass()
+        public void CanCreateCounter()
         {
-            Assert.True(true);
+            new Counter();
         }
     }
 }

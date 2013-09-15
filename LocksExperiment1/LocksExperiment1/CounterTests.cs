@@ -9,9 +9,33 @@ namespace LocksExperiment1
 {
     public class CounterTests
     {
+        class MockLock : ILock
+        {
+            bool acquired = false;
+            IDisposable ILock.Acquire()
+            {
+                this.acquired = true;
+                return this;
+            }
+
+            bool ILock.IsLocked
+            {
+                get
+                {
+                    return this.acquired && !this.disposed;
+                }
+            }
+
+            bool disposed = false;
+            void IDisposable.Dispose()
+            {
+                this.disposed = true;
+            }
+        }
+
         Counter Create()
         {
-            return new Counter(new SingleThreadedLock());
+            return new Counter(new MockLock());
         }
 
         [Fact]

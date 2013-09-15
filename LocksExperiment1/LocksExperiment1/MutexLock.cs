@@ -8,22 +8,23 @@ namespace LocksExperiment1
 {
     class MutexLock : ILock
     {
-        readonly Mutex mutex = new Mutex(false);
+        bool isLocked = false;
+
+        readonly object _syncLock = new object();
 
         IDisposable ILock.Acquire()
         {
-            this.mutex.WaitOne();
-            this._isLocked = true;
+            System.Threading.Monitor.Enter(_syncLock, ref isLocked);
             return this;
         }
 
         bool _isLocked;
-        bool ILock.IsLocked { get { return this._isLocked; } }
+        bool ILock.IsLocked { get { return this.isLocked; } }
 
         void IDisposable.Dispose()
         {
-            this._isLocked = false;
-            this.mutex.ReleaseMutex();
+            if (isLocked) System.Threading.Monitor.Exit(_syncLock);
+            isLocked = false;
         }
 
         public ILock ILock { get { return this; } }

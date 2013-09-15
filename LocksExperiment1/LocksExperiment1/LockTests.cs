@@ -31,7 +31,7 @@ namespace LocksExperiment1
             var @lock = new Lock();
 
             @lock.Acquire();
-            @lock.Release();
+            @lock.Dispose();
 
             Assert.False(@lock.IsLocked);
         }
@@ -58,6 +58,7 @@ namespace LocksExperiment1
             {
                 Assert.True(@lock.IsLocked);
             }
+
             Assert.False(@lock.IsLocked);
         }
     }

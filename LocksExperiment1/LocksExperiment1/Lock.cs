@@ -5,17 +5,17 @@ using System.Text;
 
 namespace LocksExperiment1
 {
-    class Lock
+    class Lock : IDisposable
     {
         public IDisposable Acquire()
         {
             this.IsLocked = true;
-            return null;
+            return this;
         }
 
         public bool IsLocked { get; private set; }
 
-        internal void Release()
+        public void Dispose()
         {
             this.IsLocked = false;
         }

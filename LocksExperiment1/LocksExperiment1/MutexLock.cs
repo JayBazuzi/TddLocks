@@ -2,24 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace LocksExperiment1
 {
     class MutexLock : ILock
     {
+        readonly Mutex mutex = new Mutex(false);
+
         IDisposable ILock.Acquire()
         {
-            throw new NotImplementedException();
+            this.mutex.WaitOne();
+            this._isLocked = true;
+            return this;
         }
 
-        bool ILock.IsLocked
-        {
-            get { throw new NotImplementedException(); }
-        }
+        bool _isLocked;
+        bool ILock.IsLocked { get { return this._isLocked; } }
 
         void IDisposable.Dispose()
         {
-            throw new NotImplementedException();
+            this._isLocked = false;
+            this.mutex.ReleaseMutex();
         }
+
+        public ILock ILock { get { return this; } }
     }
 }

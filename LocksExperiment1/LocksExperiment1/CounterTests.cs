@@ -33,6 +33,14 @@ namespace LocksExperiment1
             }
         }
 
+        public class MockLockTests : LockTests
+        {
+            protected override ILock Create()
+            {
+                return new MockLock();
+            }
+        }
+
         Counter Create()
         {
             return new Counter(new MockLock());

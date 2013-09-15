@@ -45,7 +45,7 @@
     <Compile Include="CounterTests.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="ILock.cs" />
-    <Compile Include="Lock.cs" />
+    <Compile Include="SingleThreadedLock.cs" />
     <Compile Include="LockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

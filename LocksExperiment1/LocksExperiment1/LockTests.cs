@@ -12,13 +12,13 @@ namespace LocksExperiment1
         [Fact]
         void CanCreateLock()
         {
-            new Lock();
+            new SingleThreadedLock();
         }
 
         [Fact]
         void LockedLockShouldBeLocked()
         {
-            var @lock = new Lock();
+            var @lock = new SingleThreadedLock();
 
             Assert.False(@lock.IsLocked);
             @lock.Acquire();
@@ -28,7 +28,7 @@ namespace LocksExperiment1
         [Fact]
         void CanReleaseLock()
         {
-            var @lock = new Lock();
+            var @lock = new SingleThreadedLock();
 
             @lock.Acquire();
             @lock.Dispose();
@@ -52,7 +52,7 @@ namespace LocksExperiment1
         [Fact]
         void DisposableLock()
         {
-            var @lock = new Lock();
+            var @lock = new SingleThreadedLock();
 
             using (@lock.Acquire())
             {

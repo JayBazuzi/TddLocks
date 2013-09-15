@@ -5,7 +5,10 @@ using System.Text;
 
 namespace LocksExperiment1
 {
-    class Lock : IDisposable, ILock
+    /// <summary>
+    /// A trivial implementation of `ILock`, which only works on one thread.
+    /// </summary>
+    class SingleThreadedLock : IDisposable, ILock
     {
         public IDisposable Acquire()
         {

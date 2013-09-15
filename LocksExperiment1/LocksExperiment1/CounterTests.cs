@@ -9,16 +9,21 @@ namespace LocksExperiment1
 {
     public class CounterTests
     {
+        Counter Create()
+        {
+            return new Counter() ;
+        }
+
         [Fact]
         public void CanCreateCounter()
         {
-            var counter = new Counter();
+            var counter = Create();
         }
 
         [Fact]
         public void CounterShouldStartAtZeor()
         {
-            var counter = new Counter();
+            var counter = Create();
             var result = counter.GetValue();
             Assert.Equal(0, result);
         }
@@ -26,7 +31,7 @@ namespace LocksExperiment1
         [Fact]
         public void CountShouldCount()
         {
-            var counter = new Counter();
+            var counter = Create();
             counter.GetValue();
             var result = counter.GetValue();
             Assert.Equal(1, result);

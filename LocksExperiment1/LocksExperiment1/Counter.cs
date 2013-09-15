@@ -14,7 +14,7 @@ namespace LocksExperiment1
             this.@lock = @lock;
         }
 
-        internal int GetValue()
+        internal int MoveNext()
         {
             return CurrentValue++;
         }

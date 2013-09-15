@@ -28,7 +28,7 @@ namespace LocksExperiment1
         public void CounterShouldStartAtZeor()
         {
             var counter = Create();
-            var result = counter.GetValue();
+            var result = counter.MoveNext();
             Assert.Equal(0, result);
         }
 
@@ -36,8 +36,8 @@ namespace LocksExperiment1
         public void CountShouldCount()
         {
             var counter = Create();
-            counter.GetValue();
-            var result = counter.GetValue();
+            counter.MoveNext();
+            var result = counter.MoveNext();
             Assert.Equal(1, result);
         }
 
@@ -48,7 +48,7 @@ namespace LocksExperiment1
 
             this.mockLock.OnAcquire += (sender, eventArgs) => Assert.Equal(0, eventArgs.CurrentValue);
             this.mockLock.OnDispose += (sender, eventArgs) => Assert.Equal(1, eventArgs.CurrentValue);
-            counter.GetValue();
+            counter.MoveNext();
         }
     }
 }

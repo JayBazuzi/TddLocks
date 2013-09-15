@@ -5,7 +5,13 @@ using System.Text;
 
 namespace LocksExperiment1
 {
-    class Lock
+    class MyLock
     {
+        public void Lock()
+        {
+            this.IsLocked = true;
+        }
+
+        public bool IsLocked;
     }
 }

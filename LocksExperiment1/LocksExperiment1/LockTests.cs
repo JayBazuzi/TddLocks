@@ -12,18 +12,17 @@ namespace LocksExperiment1
         [Fact]
         void CanCreateLock()
         {
-            new Lock();
+            new MyLock();
         }
 
         [Fact]
         void LockedLockShouldBeLocked()
         {
-            var @lock = new Lock();
+            var @lock = new MyLock();
+
+            Assert.False(@lock.IsLocked);
             @lock.Lock();
-
-            var result = @lock.IsLocked;
-
-            Assert.True(result.IsLocked);
+            Assert.True(@lock.IsLocked);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace LocksExperiment1
 
         IDisposable ILock.Acquire()
         {
-            System.Threading.Monitor.Enter(_syncLock, ref isLocked);
+            Monitor.Enter(_syncLock, ref isLocked);
             return this;
         }
 
@@ -23,7 +23,7 @@ namespace LocksExperiment1
 
         void IDisposable.Dispose()
         {
-            if (isLocked) System.Threading.Monitor.Exit(_syncLock);
+            if (isLocked) Monitor.Exit(_syncLock);
             isLocked = false;
         }
 

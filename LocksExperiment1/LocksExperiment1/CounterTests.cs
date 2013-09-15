@@ -9,9 +9,9 @@ namespace LocksExperiment1
 {
     public class CounterTests
     {
-        class MockLock : ILock
+        class MockLock<T> : ILock
         {
-            public event EventHandler<Counter> OnAcquire = delegate { };
+            public event EventHandler<T> OnAcquire = delegate { };
             bool acquired = false;
             IDisposable ILock.Acquire()
             {
@@ -28,7 +28,7 @@ namespace LocksExperiment1
                 }
             }
 
-            public event EventHandler<Counter> OnDispose = delegate { };
+            public event EventHandler<T> OnDispose = delegate { };
             bool disposed = false;
             void IDisposable.Dispose()
             {
@@ -36,8 +36,8 @@ namespace LocksExperiment1
                 this.disposed = true;
             }
 
-            Counter counter;
-            internal void SetCounter(Counter counter)
+            T counter;
+            internal void SetCounter(T counter)
             {
                 this.counter = counter;
             }
@@ -47,7 +47,7 @@ namespace LocksExperiment1
         {
             protected override ILock Create()
             {
-                return new MockLock();
+                return new MockLock<Counter>();
             }
         }
 
@@ -59,7 +59,7 @@ namespace LocksExperiment1
             return counter;
         }
 
-        MockLock mockLock = new MockLock();
+        MockLock<Counter> mockLock = new MockLock<Counter>();
 
         [Fact]
         public void CanCreateCounter()

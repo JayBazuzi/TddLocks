@@ -7,11 +7,11 @@ using Xunit;
 
 namespace LocksExperiment1
 {
-    public class MutexLockTests : LockTests
+    public class MonitorLockTests : LockTests
     {
         protected override ILock Create()
         {
-            return new MutexLock();
+            return new MonitorLock();
         }
     }
 }

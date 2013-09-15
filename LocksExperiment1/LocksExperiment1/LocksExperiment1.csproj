@@ -45,8 +45,8 @@
     <Compile Include="CounterTests.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="ILock.cs" />
-    <Compile Include="MutexLock.cs" />
-    <Compile Include="MutexLockTests.cs" />
+    <Compile Include="MonitorLock.cs" />
+    <Compile Include="MonitorLockTests.cs" />
     <Compile Include="SingleThreadedLock.cs" />
     <Compile Include="LockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

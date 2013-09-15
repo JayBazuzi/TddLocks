@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace LocksExperiment1
 {
-    class MutexLock : ILock
+    class MonitorLock : ILock
     {
         bool isLocked = false;
 

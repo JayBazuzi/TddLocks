@@ -12,10 +12,28 @@ namespace LocksExperiment1
 
         readonly object _syncLock = new object();
 
-        IDisposable ILock.Acquire()
+        IDisposableLockToken ILock.Acquire()
         {
             Monitor.Enter(_syncLock, ref isLocked);
-            return this;
+            return new DisposableToken(this);
+        }
+
+        class DisposableToken : IDisposableLockToken
+        {
+            readonly MonitorLock monitorLock;
+
+            public DisposableToken(MonitorLock monitorLock)
+            {
+                this.monitorLock = monitorLock;
+            }
+
+            void IDisposable.Dispose()
+            {
+                if (this.monitorLock.isLocked)
+                {
+                    Monitor.Exit(this.monitorLock._syncLock);
+                }
+            }
         }
 
         bool ILock.IsLocked
@@ -24,11 +42,6 @@ namespace LocksExperiment1
             {
                 return Monitor.IsEntered(this._syncLock);
             }
-        }
-
-        void IDisposable.Dispose()
-        {
-            if (isLocked) Monitor.Exit(_syncLock);
         }
     }
 }

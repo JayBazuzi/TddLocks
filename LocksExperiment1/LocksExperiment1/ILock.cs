@@ -1,9 +1,9 @@
 ﻿using System;
 namespace LocksExperiment1
 {
-    public interface ILock : IDisposable
+    public interface ILock
     {
-        IDisposable Acquire();
+        IDisposableLockToken Acquire();
 
         bool IsLocked { get; }
     }

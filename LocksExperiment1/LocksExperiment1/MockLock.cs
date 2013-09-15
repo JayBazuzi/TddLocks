@@ -9,30 +9,39 @@ namespace LocksExperiment1
     class MockLock<T> : ILock
     {
         public event EventHandler<T> OnAcquire = delegate { };
-        bool acquired = false;
+        DisposableToken disposableToken = null;
 
-        IDisposable ILock.Acquire()
+        IDisposableLockToken ILock.Acquire()
         {
             this.OnAcquire(this, this.obj);
-            this.acquired = true;
-            return this;
+            return disposableToken = new DisposableToken(this);
+        }
+
+        class DisposableToken : IDisposableLockToken
+        {
+            private MockLock<T> mockLock;
+
+            public DisposableToken(MockLock<T> mockLock)
+            {
+                this.mockLock = mockLock;
+            }
+
+            void IDisposable.Dispose()
+            {
+                this.mockLock.OnDispose(this, this.mockLock.obj);
+                this.mockLock.disposableToken = null;
+            }
         }
 
         bool ILock.IsLocked
         {
             get
             {
-                return this.acquired && !this.disposed;
+                return this.disposableToken != null;
             }
         }
 
         public event EventHandler<T> OnDispose = delegate { };
-        bool disposed = false;
-        void IDisposable.Dispose()
-        {
-            this.OnDispose(this, this.obj);
-            this.disposed = true;
-        }
 
         T obj;
         internal void SetObject(T obj)

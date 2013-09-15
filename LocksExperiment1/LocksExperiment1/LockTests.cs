@@ -32,8 +32,8 @@ namespace LocksExperiment1
         {
             var @lock = Create();
 
-            @lock.Acquire();
-            @lock.Dispose();
+            var token = @lock.Acquire();
+            token.Dispose();
 
             Assert.False(@lock.IsLocked);
         }

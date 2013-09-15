@@ -8,19 +8,28 @@ namespace LocksExperiment1
     /// <summary>
     /// A trivial implementation of `ILock`, which only works on one thread.
     /// </summary>
-    class SingleThreadedLock : IDisposable, ILock
+    class SingleThreadedLock : ILock
     {
-        public IDisposable Acquire()
+        public IDisposableLockToken Acquire()
         {
             this.IsLocked = true;
-            return this;
+            return new DisposableLockToken(this);
+        }
+
+        class DisposableLockToken : IDisposableLockToken
+        {
+            private readonly SingleThreadedLock singleThreadedLock;
+
+            public DisposableLockToken(SingleThreadedLock singleThreadedLock)
+            {
+                this.singleThreadedLock = singleThreadedLock;
+            }
+            void IDisposable.Dispose()
+            {
+                this.singleThreadedLock.IsLocked = false;
+            }
         }
 
         public bool IsLocked { get; private set; }
-
-        public void Dispose()
-        {
-            this.IsLocked = false;
-        }
     }
 }

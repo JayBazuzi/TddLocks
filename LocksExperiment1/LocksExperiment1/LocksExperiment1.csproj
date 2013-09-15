@@ -42,7 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CounterTests.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

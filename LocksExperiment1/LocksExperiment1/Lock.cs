@@ -13,5 +13,10 @@ namespace LocksExperiment1
         }
 
         public bool IsLocked;
+
+        internal void Release()
+        {
+            this.IsLocked = false;
+        }
     }
 }

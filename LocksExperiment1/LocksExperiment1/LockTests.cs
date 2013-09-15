@@ -24,5 +24,17 @@ namespace LocksExperiment1
             @lock.Acquire();
             Assert.True(@lock.IsLocked);
         }
+
+        [Fact]
+        void CanReleaseLock()
+        {
+            var @lock = new Lock();
+
+            @lock.Acquire();
+            @lock.Release();
+
+            Assert.False(@lock.IsLocked);
+
+        }
     }
 }

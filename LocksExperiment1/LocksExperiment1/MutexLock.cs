@@ -5,7 +5,21 @@ using System.Text;
 
 namespace LocksExperiment1
 {
-    class MutexLock
+    class MutexLock : ILock
     {
+        IDisposable ILock.Acquire()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ILock.IsLocked
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

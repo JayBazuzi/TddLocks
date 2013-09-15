@@ -13,7 +13,7 @@ namespace LocksExperiment1
 
         IDisposable ILock.Acquire()
         {
-            this.OnAcquire(this, this.counter);
+            this.OnAcquire(this, this.obj);
             this.acquired = true;
             return this;
         }
@@ -30,14 +30,14 @@ namespace LocksExperiment1
         bool disposed = false;
         void IDisposable.Dispose()
         {
-            this.OnDispose(this, this.counter);
+            this.OnDispose(this, this.obj);
             this.disposed = true;
         }
 
-        T counter;
-        internal void SetCounter(T counter)
+        T obj;
+        internal void SetObject(T obj)
         {
-            this.counter = counter;
+            this.obj = obj;
         }
     }
 }

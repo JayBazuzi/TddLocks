@@ -20,7 +20,7 @@ namespace LocksExperiment1
         Counter Create()
         {
             var counter = new Counter(this.mockLock);
-            this.mockLock.SetCounter(counter);
+            this.mockLock.SetObject(counter);
             return counter;
         }
 

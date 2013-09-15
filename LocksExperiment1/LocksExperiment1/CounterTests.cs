@@ -46,9 +46,16 @@ namespace LocksExperiment1
         {
             var counter = Create();
 
-            this.mockLock.OnAcquire += (sender, eventArgs) => Assert.Equal(0, eventArgs.CurrentValue);
-            this.mockLock.OnDispose += (sender, eventArgs) => Assert.Equal(1, eventArgs.CurrentValue);
+            bool wasAcquired = false;
+            bool wasDisposed = false;
+            this.mockLock.OnAcquire += (sender, eventArgs) => { wasAcquired = true; Assert.Equal(0, eventArgs.CurrentValue); };
+            this.mockLock.OnDispose += (sender, eventArgs) => { wasDisposed = true; Assert.Equal(1, eventArgs.CurrentValue); };
+            
             counter.MoveNext();
+
+            Assert.True(wasAcquired);
+            Assert.True(wasDisposed);
+
         }
     }
 }

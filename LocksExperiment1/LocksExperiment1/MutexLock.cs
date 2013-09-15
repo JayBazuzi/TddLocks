@@ -30,7 +30,5 @@ namespace LocksExperiment1
         {
             if (isLocked) Monitor.Exit(_syncLock);
         }
-
-        public ILock ILock { get { return this; } }
     }
 }

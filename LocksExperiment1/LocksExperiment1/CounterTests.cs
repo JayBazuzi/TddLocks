@@ -11,10 +11,11 @@ namespace LocksExperiment1
     {
         class MockLock : ILock
         {
+            public event EventHandler<Counter> OnAcquire = delegate { };
             bool acquired = false;
             IDisposable ILock.Acquire()
             {
-                Assert.Equal(this.originalValue, counter.CurrentValue);
+                this.OnAcquire(this, this.counter);
                 this.acquired = true;
                 return this;
             }
@@ -27,10 +28,11 @@ namespace LocksExperiment1
                 }
             }
 
+            public event EventHandler<Counter> OnDispose = delegate { };
             bool disposed = false;
             void IDisposable.Dispose()
             {
-                Assert.NotEqual(this.originalValue, counter.CurrentValue);
+                this.OnDispose(this, this.counter);
                 this.disposed = true;
             }
 
@@ -79,6 +81,9 @@ namespace LocksExperiment1
         public void CounterShouldLockAroundChange()
         {
             var counter = Create();
+
+            this.mockLock.OnAcquire += (sender, eventArgs) => Assert.Equal(0, eventArgs.CurrentValue);
+            this.mockLock.OnDispose += (sender, eventArgs) => Assert.Equal(1, eventArgs.CurrentValue);
             counter.GetValue();
         }
     }

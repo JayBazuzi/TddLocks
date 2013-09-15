@@ -7,10 +7,16 @@ namespace LocksExperiment1
 {
     class Counter
     {
+        readonly object _syncRoot = new object();
+
         int i = 0;
+
         internal int GetValue()
         {
-            return i++;
+            lock (_syncRoot)
+            {
+                return i++;
+            }
         }
     }
 }

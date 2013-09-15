@@ -7,7 +7,7 @@ namespace LocksExperiment1
 {
     class MyLock
     {
-        public void Lock()
+        public void Acquire()
         {
             this.IsLocked = true;
         }

@@ -21,7 +21,7 @@ namespace LocksExperiment1
             var @lock = new MyLock();
 
             Assert.False(@lock.IsLocked);
-            @lock.Lock();
+            @lock.Acquire();
             Assert.True(@lock.IsLocked);
         }
     }

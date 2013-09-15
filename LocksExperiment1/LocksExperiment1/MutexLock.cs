@@ -18,12 +18,17 @@ namespace LocksExperiment1
             return this;
         }
 
-        bool ILock.IsLocked { get { return this.isLocked; } }
+        bool ILock.IsLocked
+        {
+            get
+            {
+                return Monitor.IsEntered(this._syncLock);
+            }
+        }
 
         void IDisposable.Dispose()
         {
             if (isLocked) Monitor.Exit(_syncLock);
-            isLocked = false;
         }
 
         public ILock ILock { get { return this; } }

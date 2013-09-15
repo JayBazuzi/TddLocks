@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LocksExperiment1
 {
-    class Lock : IDisposable
+    class Lock : IDisposable, ILock
     {
         public IDisposable Acquire()
         {
